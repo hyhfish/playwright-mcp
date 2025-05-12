@@ -1,19 +1,17 @@
 {
-  "name": "@playwright/mcp-hyh",
+  "name": "@hyhfish/mcp-hyh",
   "version": "0.0.22",
   "description": "Playwright Tools for MCP",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hyhfish/playwright-mcp"
+    "url": "git+https://github.com/hyhfish/playwright-mcp.git"
   },
   "homepage": "https://playwright.dev",
   "engines": {
     "node": ">=18"
   },
-  "author": {
-    "name": "Microsoft Corporation"
-  },
+  "author": "Microsoft Corporation",
   "license": "Apache-2.0",
   "scripts": {
     "build": "tsc",
@@ -56,5 +54,15 @@
   },
   "bin": {
     "mcp-server-playwright": "cli.js"
+  },
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "tests"
+  },
+  "types": "./index.d.ts",
+  "bugs": {
+    "url": "https://github.com/hyhfish/playwright-mcp/issues"
   }
 }

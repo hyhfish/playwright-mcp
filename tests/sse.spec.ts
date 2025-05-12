@@ -24,7 +24,7 @@ import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 
-import { createConnection } from '@playwright/mcp';
+import { createConnection } from '@playwright/mcp-hyh';
 
 import { test as baseTest, expect } from './fixtures.js';
 
