@@ -26,11 +26,26 @@ const navigate: ToolFactory = captureSnapshot => defineTool({
     description: 'Navigate to a URL',
     inputSchema: z.object({
       url: z.string().describe('The URL to navigate to'),
+      userDataDir: z.string().optional().describe('Custom user data directory for browser profile'),
     }),
     type: 'destructive',
   },
 
   handle: async (context, params) => {
+    // 如果指定了自定义用户数据目录，需要关闭当前浏览器并重新启动
+    if (params.userDataDir) {
+      // 关闭现有的浏览器上下文
+      await context.close();
+      
+      // 更新配置以使用新的用户数据目录
+      if (context.config.browser) {
+        context.config.browser.userDataDir = params.userDataDir;
+      }
+      
+      // 新的浏览器上下文会在 ensureTab 中自动创建
+    }
+    
+    // 确保有一个标签页可用（如果浏览器被关闭，这会触发使用新的用户数据目录创建新的上下文）
     const tab = await context.ensureTab();
     await tab.navigate(params.url);
 
