@@ -1,11 +1,11 @@
 {
-  "name": "@playwright/mcp",
+  "name": "@playwright/mcp-hyh",
   "version": "0.0.22",
   "description": "Playwright Tools for MCP",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/microsoft/playwright-mcp.git"
+    "url": "git+https://github.com/hyhfish/playwright-mcp"
   },
   "homepage": "https://playwright.dev",
   "engines": {

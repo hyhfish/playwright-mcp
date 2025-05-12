@@ -30,7 +30,7 @@ node utils/generate-links.js
     "playwright": {
       "command": "npx",
       "args": [
-        "@playwright/mcp@latest"
+        "@playwright/mcp-hyh@latest"
       ]
     }
   }
@@ -174,7 +174,7 @@ The Playwright MCP server can be configured using a JSON configuration file. Her
 You can specify the configuration file using the `--config` command line option:
 
 ```bash
-npx @playwright/mcp@latest --config path/to/config.json
+npx @playwright/mcp-hyh@latest --config path/to/config.json
 ```
 
 ### Running on Linux
@@ -183,7 +183,7 @@ When running headed browser on system w/o display or from worker processes of th
 run the MCP server from environment with the DISPLAY and pass the `--port` flag to enable SSE transport.
 
 ```bash
-npx @playwright/mcp@latest --port 8931
+npx @playwright/mcp-hyh@latest --port 8931
 ```
 
 And then in MCP client config, set the `url` to the SSE endpoint:
@@ -254,7 +254,7 @@ To use Vision Mode, add the `--vision` flag when starting the server:
     "playwright": {
       "command": "npx",
       "args": [
-        "@playwright/mcp@latest",
+        "@playwright/mcp-hyh@latest",
         "--vision"
       ]
     }
