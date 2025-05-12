@@ -447,7 +447,10 @@ X Y coordinate space, based on the provided screenshot.
   - Description: Navigate to a URL
   - Parameters:
     - `url` (string): The URL to navigate to
+    - `userDataDir` (string, optional): Custom user data directory for browser profile
   - Read-only: **false**
+
+<!-- 注意: browser_navigate 命令的 userDataDir 参数是在微软原始 Playwright MCP 项目基础上增强的功能。此参数允许在导航过程中动态切换浏览器用户配置文件目录，无需重启整个服务。当指定此参数时，当前浏览器会关闭并使用新的用户数据目录重新启动。 -->
 
 <!-- NOTE: This has been generated via update-readme.js -->
 
