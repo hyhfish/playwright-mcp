@@ -63,7 +63,7 @@ test('create new tab', async ({ client }) => {
 - Page Title: Tab one
 - Page Snapshot
 \`\`\`yaml
-- generic [ref=s1e2]: Body one
+- generic [ref=e1]: Body one
 \`\`\``);
 
   expect(await createTab(client, 'Tab two', 'Body two')).toHaveTextContent(`
@@ -82,7 +82,7 @@ test('create new tab', async ({ client }) => {
 - Page Title: Tab two
 - Page Snapshot
 \`\`\`yaml
-- generic [ref=s1e2]: Body two
+- generic [ref=e1]: Body two
 \`\`\``);
 });
 
@@ -110,7 +110,7 @@ test('select tab', async ({ client }) => {
 - Page Title: Tab one
 - Page Snapshot
 \`\`\`yaml
-- generic [ref=s2e2]: Body one
+- generic [ref=e1]: Body one
 \`\`\``);
 });
 
@@ -137,11 +137,13 @@ test('close tab', async ({ client }) => {
 - Page Title: Tab one
 - Page Snapshot
 \`\`\`yaml
-- generic [ref=s2e2]: Body one
+- generic [ref=e1]: Body one
 \`\`\``);
 });
 
-test('reuse first tab when navigating', async ({ startClient, cdpEndpoint }) => {
+test('reuse first tab when navigating', async ({ startClient, cdpEndpoint, server }) => {
+  server.setContent('/', `<title>Title</title><body>Body</body>`, 'text/html');
+
   const browser = await chromium.connectOverCDP(await cdpEndpoint());
   const [context] = browser.contexts();
   const pages = context.pages();
@@ -149,9 +151,7 @@ test('reuse first tab when navigating', async ({ startClient, cdpEndpoint }) => 
   const client = await startClient({ args: [`--cdp-endpoint=${await cdpEndpoint()}`] });
   await client.callTool({
     name: 'browser_navigate',
-    arguments: {
-      url: 'data:text/html,<title>Title</title><body>Body</body>',
-    },
+    arguments: { url: server.PREFIX },
   });
 
   expect(pages.length).toBe(1);

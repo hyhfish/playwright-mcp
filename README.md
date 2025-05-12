@@ -207,7 +207,7 @@ And then in MCP client config, set the `url` to the SSE endpoint:
   "mcpServers": {
     "playwright": {
       "command": "docker",
-      "args": ["run", "-i", "--rm", "--init", "mcp/playwright"]
+      "args": ["run", "-i", "--rm", "--init", "--pull=always", "mcr.microsoft.com/playwright/mcp"]
     }
   }
 }
@@ -216,7 +216,7 @@ And then in MCP client config, set the `url` to the SSE endpoint:
 You can build the Docker image yourself.
 
 ```
-docker build -t mcp/playwright .
+docker build -t mcr.microsoft.com/playwright/mcp .
 ```
 
 ### Programmatic usage
@@ -231,7 +231,7 @@ http.createServer(async (req, res) => {
   // ...
 
   // Creates a headless Playwright MCP server with SSE transport
-  const connection = await createConnection({ headless: true });
+  const connection = await createConnection({ browser: { launchOptions: { headless: true } } });
   const transport = new SSEServerTransport('/messages', res);
   await connection.connect(transport);
 
@@ -341,6 +341,7 @@ X Y coordinate space, based on the provided screenshot.
   - Description: Take a screenshot of the current page. You can't perform actions based on the screenshot, use browser_snapshot for actions.
   - Parameters:
     - `raw` (boolean, optional): Whether to return without compression (in PNG format). Default is false, which returns a JPEG image.
+    - `filename` (string, optional): File name to save the screenshot to. Defaults to `page-{timestamp}.{png|jpeg}` if not specified.
     - `element` (string, optional): Human-readable element description used to obtain permission to screenshot the element. If not provided, the screenshot will be taken of viewport. If element is provided, ref must be provided too.
     - `ref` (string, optional): Exact target element reference from the page snapshot. If not provided, the screenshot will be taken of viewport. If ref is provided, element must be provided too.
   - Read-only: **true**
@@ -501,7 +502,8 @@ X Y coordinate space, based on the provided screenshot.
 - **browser_pdf_save**
   - Title: Save as PDF
   - Description: Save page as PDF
-  - Parameters: None
+  - Parameters:
+    - `filename` (string, optional): File name to save the pdf to. Defaults to `page-{timestamp}.pdf` if not specified.
   - Read-only: **true**
 
 ### Utilities
@@ -516,11 +518,13 @@ X Y coordinate space, based on the provided screenshot.
 
 <!-- NOTE: This has been generated via update-readme.js -->
 
-- **browser_wait**
-  - Title: Wait
-  - Description: Wait for a specified time in seconds
+- **browser_wait_for**
+  - Title: Wait for
+  - Description: Wait for text to appear or disappear or a specified time to pass
   - Parameters:
-    - `time` (number): The time to wait in seconds
+    - `time` (number, optional): The time to wait in seconds
+    - `text` (string, optional): The text to wait for
+    - `textGone` (string, optional): The text to wait for to disappear
   - Read-only: **true**
 
 <!-- NOTE: This has been generated via update-readme.js -->
